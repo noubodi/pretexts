@@ -14,6 +14,12 @@
 App::before(function($request)
 {
 	//
+	if(Session::get('locale')) {
+		Lang::setlocale(Session::get('locale'));
+	} else {
+		$language = Language::where('is_enable','=','y')->firstOrFail();
+		Lang::setlocale($language->short_name);
+	}
 });
 
 
