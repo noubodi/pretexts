@@ -19,8 +19,26 @@ Route::model('workshop', 'Workshop');
 
 // Route::get('login', 'SentryController@index');
 
+
+
 // Pages
 Route::get('/', 'HomeController@index');
+// ESTO SE PASA AL CONTROLLER
+// Route::get('/', function()
+// {	
+// 	$languages = Language::all();
+// 	$current_lang = 'name_'.Lang::getLocale();
+// 	$countries = DB::table('countries')->select( 'id' ,  $current_lang . ' as name')->get();
+// 
+// 	return View::make('home', ['countries' => $countries, 'languages' => $languages]);
+// });
+// LANGUAGES
+Route::get('/lang/{language}', function($language)
+{
+	// Function that change language
+	Session::set('locale', $language);
+	return Redirect::back();
+})->where('language', '[A-za-z]+');
 
 // ABOUT
 Route::get('what-is-pretexts', function() {
